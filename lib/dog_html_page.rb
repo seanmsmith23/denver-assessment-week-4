@@ -2,13 +2,13 @@ class DogHTMLPage
 
   def initialize(input)
     @dogs = input
+    @number = @dogs.size
     # @dogs is an array of hashes
   end
 
   def title
-    number = @dogs.size
-    if number > 0
-      output = "<h1>There are #{number} dogs</h1>"
+    if not_empty?
+      output = "<h1>There are #{@number} dogs</h1>"
     else
       output = "<h1>There are no dogs</h1>"
     end
@@ -29,12 +29,16 @@ class DogHTMLPage
       "<li>" + dog + "</li>"
     end
 
-    if @dogs.size > 0
-      final = open + li_list.join(',').gsub(',','') + close
+    if not_empty?
+      open + li_list.join(',').gsub(',','') + close
     else
-      final = ""
+      ""
     end
 
+  end
+
+  def not_empty?
+    @number > 0
   end
 
 end
